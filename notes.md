@@ -25,4 +25,4 @@ This file is for taking notes, capturing my thought process and developing an id
     Data cleaning, exploratory data analysis, modeling
 
 ## Data
-I thought about scraping telegram channels, but there is an [api](https://devs.alerts.in.ua/#apiregions_history) for getting history of alerts in all regions, hope it will wor
+I thought about scraping telegram channels, but there is an [api](https://devs.alerts.in.ua/#apiregions_history) for getting history of alerts in all regions, hope it will work. (it wont't work because data is available only for last month, instead I'll use [open source dataset]((https://github.com/Vadimkin/ukrainian-air-raid-sirens-dataset)))

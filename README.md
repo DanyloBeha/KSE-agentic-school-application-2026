@@ -1,0 +1,2 @@
+# KSE-agentic-school-application-2026
+Stage 2 of KSE AI Agentic Summer School Application - Time Series Analysis of air raid alerts in Ukraine

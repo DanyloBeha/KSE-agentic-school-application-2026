@@ -20,6 +20,8 @@ def main() -> None:
 
     analyze.run(aggregate)
     forecast.run(aggregate)
+    forecast.run_region(by_region, "Kyiv City")
+    forecast.run_long_ets(aggregate)
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
+import metrics
 from preprocess import VALUE_COL
 
 PLOTS_DIR = Path(__file__).resolve().parent.parent / "plots"
@@ -26,6 +27,8 @@ def _evaluate(name, actual, predicted) -> None:
     mae = mean_absolute_error(actual, predicted)
     rmse = _rmse(actual, predicted)
     print(f"[forecast] {name:18s} MAE={mae:7.2f} RMSE={rmse:7.2f}")
+    key = name.lower()
+    metrics.update({f"{key}_mae": float(mae), f"{key}_rmse": float(rmse)})
 
 
 def run(aggregate) -> None:

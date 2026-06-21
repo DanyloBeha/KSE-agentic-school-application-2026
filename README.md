@@ -2,6 +2,7 @@
 Stage 2 of KSE AI Agentic Summer School Application - Time Series Analysis of air raid alerts in Ukraine
 
 ## Structure
+- conversation.md - conversation history with claude
 - notes.md - thought process
 - src/ - analysis pipeline
   - fetch_data.py - download & cache the dataset

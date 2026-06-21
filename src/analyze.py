@@ -7,6 +7,7 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.stattools import adfuller
 
+import metrics
 from preprocess import VALUE_COL
 
 PLOTS_DIR = Path(__file__).resolve().parent.parent / "plots"
@@ -18,6 +19,8 @@ def adf_test(series) -> bool:
     stationary = pvalue < 0.05
     print(f"[analyze] ADF stat={stat:.3f} p={pvalue:.4f} -> "
           f"{'stationary' if stationary else 'non-stationary'}")
+    metrics.update({"adf_stat": float(stat), "adf_pvalue": float(pvalue),
+                    "adf_stationary": bool(stationary)})
     return stationary
 
 

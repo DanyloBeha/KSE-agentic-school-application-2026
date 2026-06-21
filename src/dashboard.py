@@ -76,6 +76,33 @@ PLOTS = {
             "weak seasonality seen in the decomposition."
         ),
     },
+    "Kyiv City forecast": {
+        "file": "forecast_kyiv_city.png",
+        "what": (
+            "Same 14-day SARIMA forecast + 95% CI, but for **Kyiv City** alone "
+            "instead of the national aggregate."
+        ),
+        "takeaway": (
+            "Single-oblast view: lower absolute alert-hours than the national "
+            "sum but spikier. Compare its RMSE (metric row) to the aggregate — "
+            "a single region is noisier, so point forecasts are less certain."
+        ),
+    },
+    "2026 ETS outlook": {
+        "file": "forecast_ukraine_ets.png",
+        "what": (
+            "Long-horizon **Exponential Smoothing** (damped-trend Holt-Winters) "
+            "of national alert-hours to 2026-12-31, shown as **monthly means** "
+            "over full history, with a simulated 95% band and the **same months "
+            "of 2025** overlaid for comparison."
+        ),
+        "takeaway": (
+            "Damped trend levels off at ~166 h/day instead of extrapolating the "
+            "rise forever — and sits **above** the 2025 H2 actuals, so the model "
+            "expects activity to stay elevated, not revert. The band widens with "
+            "horizon: the year-end figure is a scenario, not a precise number."
+        ),
+    },
 }
 
 
@@ -86,7 +113,7 @@ def _load_metrics() -> dict:
 
 
 def _metric_row(m: dict) -> None:
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3, c4 = st.columns(4)
     if "adf_pvalue" in m:
         verdict = "stationary" if m.get("adf_stationary") else "non-stationary"
         c1.metric("ADF p-value", f"{m['adf_pvalue']:.3f}", verdict,
@@ -95,6 +122,13 @@ def _metric_row(m: dict) -> None:
         c2.metric("SARIMA RMSE", f"{m['sarima_rmse']:.2f}")
     if "expsmoothing_rmse" in m:
         c3.metric("ExpSmoothing RMSE", f"{m['expsmoothing_rmse']:.2f}")
+    if "kyiv_city_rmse" in m:
+        c4.metric("Kyiv City RMSE", f"{m['kyiv_city_rmse']:.2f}")
+    if "ets_2026_endvalue" in m:
+        st.caption(
+            f"ETS year-end 2026 estimate: **{m['ets_2026_endvalue']:.0f}** "
+            f"alert-hours/day (horizon {m.get('ets_2026_horizon_days', '?')} days)."
+        )
 
 
 def main() -> None:

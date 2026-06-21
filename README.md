@@ -7,8 +7,10 @@ Stage 2 of KSE AI Agentic Summer School Application - Time Series Analysis of ai
   - fetch_data.py - download & cache the dataset
   - preprocess.py - per-oblast daily alert-hours (overlap-merged) + national aggregate
   - analyze.py - ADF stationarity, weekly decomposition, ACF/PACF
-  - forecast.py - SARIMA vs Exponential Smoothing, 14-day forecast
+  - forecast.py - national SARIMA vs Exponential Smoothing (14-day), single-oblast
+    forecast (Kyiv City), and long-horizon damped ETS to end-2026
   - visualize.py - time series + per-oblast heatmap
+  - metrics.py - shared sink writing key numbers to plots/metrics.json
   - main.py - runs the full pipeline
   - dashboard.py - Streamlit UI embedding the plots with commentary
 
